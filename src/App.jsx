@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import {  useState, useEffect } from "react";
 
 import "./App.css";
 
@@ -8,7 +8,7 @@ function App() {
   let [numberAllowed, setNumberAllowed] = useState(false);
   let [specialCharAllowed, setSpecialCharAllowed] = useState(false);
 
-  const passwordGenerator = useCallback(() => {
+  const passwordGenerator =() => {
     let password = "";
     let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let num = "12345679";
@@ -24,7 +24,7 @@ function App() {
       password += str.charAt(realPassword);
     }
     setPassword(password);
-  }, [numberAllowed, value, specialCharAllowed]);
+  };
 
   
 
@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <div className="w-full h-screen flex justify-center items-center bg-gradient-to-r from-[#1CB5E0] to-[#000851]">
-        <div className="w-[90%] max-w-md shadow p-4 rounded bg-[#ffffff2b]">
+        <div className="w-[90%] max-w-lg shadow p-4 rounded bg-[#ffffff2b]">
           <h1 className="text-2xl text-center mb-3 font-bold text-white">
             Password Generator
           </h1>
@@ -58,7 +58,8 @@ function App() {
               Copy
             </button>
           </div>
-          <div className="flex justify-between align-middle">
+          <div className="flex justify-between items-center">
+            <label className="flex justify-center flex-col items-center font-bold" htmlFor="input">Password Range
             <input
               type="range"
               className="cursor-pointer"
@@ -67,6 +68,8 @@ function App() {
               value={value}
               onChange={(e) => setValue(e.target.value)}
             />
+            </label>
+            
             <input
               className="mt-1 cursor-pointer"
               type="checkbox"
@@ -74,16 +77,19 @@ function App() {
               defaultChecked={numberAllowed}
               onChange={(e) => setNumberAllowed(e.target.checked)}
             />
-            <label htmlFor="number">number</label>
+            <label htmlFor="number" className="font-bold">number</label>
             <input
               className="mt-1 cursor-pointer"
               type="checkbox"
               defaultChecked={specialCharAllowed}
               onChange={(e) => setSpecialCharAllowed(e.target.checked)}
             />
-            <label htmlFor="special-char">special-char</label>
-            <p>Length: {value}</p>
+            <label htmlFor="special-char" className="font-bold">special-char</label>
+            <p className="font-bold">Length: {value}</p>
           </div>
+          <div className="w-full flex justify-center items-center p-4 mt-4">
+            <button onClick={passwordGenerator} className="p-2 border rounded  bg-[#0008519c] cursor-pointer text-white w-full">Generate Password</button>
+        </div>
         </div>
       </div>
     </>
